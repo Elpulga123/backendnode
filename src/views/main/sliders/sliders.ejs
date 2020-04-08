@@ -1,0 +1,171 @@
+<% extend("../../master") %>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="icofont icofont-file-code bg-c-blue"></i>
+                                <div class="d-inline">
+                                    <h4> Danh sách sản phẩm </h4>
+                                    <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html">
+                                            <i class="icofont icofont-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page-header end -->
+                <div class="page-body">
+                    <!-- Danh sách sản phẩm -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5> Danh sách Slider </h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="icofont icofont-simple-left "></i></li>
+                                    <li><i class="icofont icofont-maximize full-card"></i></li>
+                                    <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                    <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                    <li><i class="icofont icofont-error close-card"></i></li>
+                                </ul>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"
+                                data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                <i class="icofont icofont-plus"></i>
+                            </button>
+                            <div class="collapse" id="collapseExample">
+                                <div class="update-avatar-form">
+                                    <form action="/admin/add_slider" method="POST" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <source>
+                                            <div class="col-xs-12 col-sm-4 col-md-5">
+                                                <div class="product-image text-md-center">
+                                                    <div class="avatar-change">
+                                                        <img id="product-avatar-preview" src="" alt="">
+                                                    </div>
+                                                    <div>
+                                                        <img id="product-avatar"
+                                                            src="/assets/images/auth/<%= user.avatar %>" alt="">
+                                                    </div>
+                                                    <input name="slider-image" type="file" id="product-change-avatar">
+                                                    <!-- Preview avatar change change -->
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-8 col-md-7">
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold" for="slider_bigcaption"> Big caption
+                                                        Sliders
+                                                    </label>
+                                                    <input type="text" name="slider_bigcaption" id="slider_bigcaption"
+                                                        class="form-control form-bg-inverse"
+                                                        placeholder="Big caption slider">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold" for="slider_smallcaption"> Small
+                                                        Caption
+                                                        Sldier
+                                                    </label>
+                                                    <input type="text" name="slider_smallcaption"
+                                                        id="slider_smallcaption" class="form-control form-bg-inverse"
+                                                        placeholder="Small caption SLider">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary waves-effect mt-4"
+                                                        data-type="danger" data-from="top" data-align="right"
+                                                        id="add_product" data-dismiss="modal"> Thêm
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block table-border-style mt-2">
+                            <div class="table-responsive slider-delete">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th> STT </th>
+                                            <th> Ảnh Slider </th>
+                                            <th> Big Caption </th>
+                                            <th> Small Caption </th>
+                                            <th> hành động </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% Sliders.forEach(function(slider, index){ %>
+                                        <tr>
+                                            <th scope="row"><%= index %></th>
+                                            <th> <img class="sp_img" src="/assets/images/sliders/<%= slider.image %>"
+                                                    alt=""> </th>
+                                            <td class="font-weight-bold"><%= slider.bigCaption %></td>
+                                            <td> <span class="product"> <%= slider.smallCaption %> </span> </td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a href="/admin/slider/edit_slider/<%= slider._id %>" type="button"
+                                                        class="btn btn-warning" title="Sửa Slider ">
+                                                        <i class="icofont icofont-edit"></i> </a>
+                                                    <a href="/admin/slider/delete_slider/<%= slider._id %>"
+                                                        type="button" class="btn btn-danger delete_slider" data-toggle="modal"
+                                                        data-target="#deleteSliderModal"> <i
+                                                            class="icofont icofont-ui-delete" title="Xóa Slider "></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal -->
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Danh sách sản phẩm end -->
+                </div>
+            </div>
+            <div id="styleSelector">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteSliderModal" tabindex="-1" role="dialog" aria-labelledby="deleteSliderModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"> Xoá Slider
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Bạn có chắc muốn xóa slider này không ! </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Hủy </button>
+                <a href="" type="button" class="btn btn-primary" id="delete_slider"> Xóa </a>
+            </div>
+        </div>
+    </div>
+</div>

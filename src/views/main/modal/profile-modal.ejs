@@ -1,0 +1,87 @@
+<div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <%= user.userName %> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-image text-md-center">
+                    <div class="avatar-change">
+                        <img id="image-avatar-preview" src="" alt="">
+                    </div>
+                    <img id="image-avatar-info" src="/assets/images/auth/<%= user.avatar %>" alt="">
+                    <input type="file" id="input-change-avatar">
+                    <!-- Preview avatar change change -->
+                </div>
+                <div class="another-info">
+                    <form method="post">
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="username"> Họ tên </label>
+                            <input type="text" name="username" id="profile-username"
+                                class="form-control form-bg-inverse" value="<%= user.userName %>" placeholder="Họ tên">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="username"> Số điện thoại </label>
+                            <input type="text" value="<%= user.phone %>" name="phone" id="profile-phone"
+                                class="form-control form-bg-inverse" placeholder="Số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="username"> Email </label>
+                            <input type="text" value="<%= user.local.email %>" name="email" id="profile-email"
+                                class="form-control form-bg-inverse" placeholder="Email">
+                        </div>
+                        <% if(user.gender === 'male'){%>
+                        <div class="form-group gender-form">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="profile-gender-male"
+                                    value="male" checked>
+                                <label class="form-check-label" for="gender">
+                                    Nam
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="profile-gender-female"
+                                    value="female">
+                                <label class="form-check-label" for="gender">
+                                    Nữ
+                                </label>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% if(user.gender === 'female'){%>
+                        <div class="form-group gender-form">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="gender" value="male">
+                                <label class="form-check-label" for="gender">
+                                    Nam
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="gender" value="female"
+                                    checked>
+                                <label class="form-check-label" for="gender">
+                                    Nữ
+                                </label>
+                            </div>
+                        </div>
+                        <% } %>
+                        <div class="form-group">
+                            <label class="font-weight-bold" sfor="username"> Địa chỉ </label>
+                            <input type="text" value="<%= user.local.email %>" name="address" id="profile-address"
+                                class="form-control form-bg-inverse" placeholder="Địa chỉ">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Đóng </button>
+                <button type="submit" class="btn btn-primary waves-effect" data-type="danger" data-from="top"
+                    data-align="right" id="checkinfo-change" data-dismiss="modal"> Lưu </button>
+            </div>
+        </div>
+    </div>
+</div>

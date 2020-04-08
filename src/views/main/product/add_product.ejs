@@ -1,0 +1,165 @@
+<% extend("../../master") %>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="icofont icofont-file-code bg-c-blue"></i>
+                                <div class="d-inline">
+                                    <h4> <%= title %> </h4>
+                                    <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html">
+                                            <i class="icofont icofont-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page-header end -->
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5> Danh sách Sản Phẩm </h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="icofont icofont-simple-left "></i></li>
+                                    <li><i class="icofont icofont-maximize full-card"></i></li>
+                                    <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                    <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                    <li><i class="icofont icofont-error close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block table-border-style mt-2">
+                            <div class="col-md-12 col-xl-12">
+                                <div class="update-avatar-form">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div id="my-awesome-dropzone" class="dropzone mb-4">
+                                            </div>
+                                            <div id="previews">
+                                                <div id="template" class="file-row">
+                                                    <div>
+                                                        <span class="preview"><img data-dz-thumbnail /></span>
+                                                    </div>
+                                                    <div>
+                                                        <p class="name" data-dz-name></p>
+                                                        <strong class="error text-danger"
+                                                            data-dz-errormessage>ERROR</strong>
+                                                    </div>
+                                                    <div>
+                                                        <p class="size" data-dz-size></p>
+                                                        <div class="progress progress-striped active" role="progressbar"
+                                                            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                            <div class="progress-bar progress-bar-success"
+                                                                style="width:0%;" data-dz-uploadprogress>PROGRESS</div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button class="btn btn-primary start fileinput-button">
+                                                            <i class="glyphicon glyphicon-upload"></i>
+                                                            <span>Start</span>
+                                                        </button>
+                                                        <button data-dz-remove class="btn btn-warning cancel">
+                                                            <i class="glyphicon glyphicon-ban-circle"></i>
+                                                            <span>Cancel</span>
+                                                        </button>
+                                                        <button data-dz-remove class="btn btn-danger delete">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                            <span>Delete</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-sm-12">
+                                            <form action="/admin/add_product" id="product_form" method="POST"
+                                                enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="image_path" id="image_path"
+                                                            class="form-control form-bg-inverse"
+                                                            placeholder="Đường dẫn sản phẩm">
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="font-weight-bold" for="product_name"> Tên Sản
+                                                                Phẩm
+                                                            </label>
+                                                            <input type="text" name="product_name"
+                                                                class="form-control form-bg-inverse"
+                                                                placeholder="Tên sản phẩm">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="font-weight-bold" for="product_brand"> Thương
+                                                                Hiệu
+                                                            </label>
+                                                            <select class="form-control custom-select"
+                                                                name="product_brand" id="product_brand">
+                                                                <option selected>Choose...</option>
+                                                                <option value="apple"> Apple </option>
+                                                                <option value="samsung"> SamSung </option>
+                                                                <option value="xiaomi"> Xiaomi </option>
+                                                                <option value="oppo"> Oppo </option>
+                                                                <option value="lg"> LG </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="font-weight-bold" for="product_price"> Giá sản
+                                                                phẩm
+                                                            </label>
+                                                            <input type="text" name="product_price" id="product_price"
+                                                                class="form-control form-bg-inverse"
+                                                                placeholder="giá sản phẩm">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="font-weight-bold" for="product_count"> Số
+                                                                lượng </label>
+                                                            <input type="text" name="product_count" id="product_count"
+                                                                class="form-control form-bg-inverse"
+                                                                placeholder="Số lượng">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="font-weight-bold" for="product_count"> Mô tả
+                                                            </label>
+                                                            <textarea id="summernote"
+                                                                name="propduct_describes"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <input type="button" class="btn btn-primary waves-effect mt-4" data-type="danger"
+                                                    data-from="top" data-align="right" id="add_product"> -->
+                                            </form>
+                                            <button type="button" id="dropzoneSubmit" class="uk-button btn btn-primary">
+                                                Thêm sản phẩm
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="styleSelector">
+            </div>
+        </div>
+    </div>
+</div>

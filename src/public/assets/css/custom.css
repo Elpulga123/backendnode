@@ -1,0 +1,80 @@
+.profile-image img {
+    border-radius: 50%;
+    border: 5px solid;
+}
+.gender-form input {
+    margin-left: 0;
+}
+img#image-avatar-preview {
+    width: 100px;
+    height: 100px;
+}
+.avatar-change{
+    text-align: left;
+    display: inline-block;
+    margin-right: 10px;
+}
+.profile-image img {
+    border-radius: 50%;
+    border: 5px solid;
+    width: 100px;
+    height: 100px;
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    margin-bottom: 30px;
+}
+.sp_img{
+    max-width: 50px;
+}
+
+.update-avatar-form{
+    padding: 30px;
+}
+.product-image img#product-avatar {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+.product-image img {
+    max-width: 200px;
+}
+.dropzone-edit-more{
+    display: none;
+    transition: 0.4s;
+}
+.dropzone-edit-more.show{
+    display: block;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* product imgae / change edit product */
+.product-image{
+    position: relative;
+}
+.product-image:hover .iconss{
+    opacity:1;
+}
+.iconss {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0000006b;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+.iconss i.icofont.icofont-edit {
+    border: 1px solid white;
+    padding: 20px;
+}
+.iconss i.icofont.icofont-edit {
+    border: 1px solid white;
+    padding: 20px;
+    cursor: pointer;
+}

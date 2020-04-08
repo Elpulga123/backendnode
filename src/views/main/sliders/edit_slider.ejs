@@ -1,0 +1,99 @@
++<% extend("../../master") %>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="icofont icofont-file-code bg-c-blue"></i>
+                                <div class="d-inline">
+                                    <h4> Chỉnh sửa slider </h4>
+                                    <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html">
+                                            <i class="icofont icofont-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page-header end -->
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5> Chỉnh sửa slider </h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="icofont icofont-simple-left "></i></li>
+                                    <li><i class="icofont icofont-maximize full-card"></i></li>
+                                    <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                    <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                    <li><i class="icofont icofont-error close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block table-border-style mt-2">
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12">
+                                    <form action="/admin/slider/edit_slider/<%= slider._id %>" method="POST"
+                                        enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-4 col-md-5">
+                                                <div class="product-image text-md-center">
+                                                    <div class="avatar-change">
+                                                        <img id="product-avatar-preview" src="" alt="">
+                                                    </div>
+                                                    <img id="product-avatar"
+                                                        src="/assets/images/sliders/<%= slider.image %>" alt="">
+                                                    <input name="slider-image" type="file" id="product-change-avatar">
+                                                    <!-- Preview avatar change change -->
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-8 col-md-7">
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold" for="slider_name"> Tiêu đề lớn
+                                                    </label>
+                                                    <input type="text" name="slider_bigCaption" value="<%= slider.bigCaption %>"
+                                                        class="form-control form-bg-inverse" placeholder="Tiêu đề lớn">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold" for="slider_price"> Tiêu đề nhỏ
+                                                    </label>
+                                                    <input type="text" name="slider_smallCaption" value="<%= slider.smallCaption %>"
+                                                        class="form-control form-bg-inverse" placeholder="Tiêu đề nhỏ">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1-12">
+                                            <button type="submit" class="btn btn-primary waves-effect mt-4"
+                                                data-type="danger" data-from="top" data-align="right"
+                                                id="edit_product_button" data-dismiss="modal"> Lưu
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="styleSelector">
+            </div>
+        </div>
+    </div>
+</div>
