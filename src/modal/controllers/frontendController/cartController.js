@@ -1,11 +1,7 @@
 import service from '../../../service';
-import { app } from '../../config/app';
-import { TranProductSuccess } from '../../../../lang/vi';// login authencation
 import Cart from '../../config/cart';
 import { paymentConfigure } from '../../config/paypal';
-import currencyFormatter from 'currency-formatter';
 import paypal from 'paypal-rest-sdk';
-import queryString  from 'query-string';
 
 
 // cấu hình paypal.
@@ -82,15 +78,6 @@ let checkoutInfo = (req, res, next) => {
 
     const objs = req.body; // req.body = [Object: null prototype] { title: 'product' }
     console.log(objs);
-    objs.forEach(item => {
-        console.log(item);
-        console.log(typeof item);
-    })
-
-    // for (var prop in objs) {
-    //     console.log('obj.' + prop + '=' + objs[prop]);
-    // };
-    // console.log(req.body);
     let result = {
         obj: objs
     }

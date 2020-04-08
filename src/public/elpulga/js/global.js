@@ -31,7 +31,7 @@ function deleteItemcart(url) {
 
 function formatPrice() {
     // price Format for frontend
-    const formatter = new Intl.NumberFormat('VND', {
+    var formatter = new Intl.NumberFormat('VND', {
         style: 'currency',
         currency: 'VND',
         minimumFractionDigits: 0
@@ -62,8 +62,6 @@ function checkoutinfo123(data) {
     })
 }
 
-
-
 $(document).ready(function () {
 
     // cho hiển thị số sản phẩm lên giỏ hàng
@@ -79,41 +77,19 @@ $(document).ready(function () {
     formatPrice();
     /* FORM CHECKOUT / START */
 
-    // get form checkou info
-  
-    
-
     var formcheckout = new FormData();
     var cartinfo = {}
+
     function checkoutForm() {
-
-        $('#profile-username').bind('change', function () {
-            cartinfo.userName = $(this).val();
+        var checkoutinfo = $('#checkoutinfo');
+        var x = checkoutinfo.serializeArray();
+        x.forEach(function (value, index) {
+            cartinfo[value.name] = value.value;
         })
-        $('#profile-email').bind('change', function () {
-            cartinfo.email = $(this).val();
-        })
-        $('#profile-phone').bind('change', function () {
-            cartinfo.phone = $(this).val();
-        })
-        $('#profile-address').bind('change', function () {
-            cartinfo.address = $(this).val();
-        })
-        $('#profile-gender-male').bind('click', function () {
-            cartinfo.gender = $(this).val();
-        })
-        $('#profile-gender-female').bind('click', function () {
-            cartinfo.gender = $(this).val();
-        })
-        
-        //var x = checkoutinfo.serializeArray();
-        var x = JSON.stringify(checkoutinfo.serializeArray());
-        formcheckout.append('checkoutinfo', x);
-        checkoutinfo123(formcheckout);
-        console.log(option);
-    }     
+        checkoutinfo123(JSON.stringify(cartinfo));
+    }
+    
     // button payment click submit form.
-
     $('.payment__btn .active .test').on('click', function (e) {
         e.preventDefault();
         checkoutForm();
