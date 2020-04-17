@@ -6,7 +6,7 @@ function addtocart(url) {
         type: 'GET',
         success: function (result) {
             $('.htc__qua').text(result.carttotal);
-            alert(result);
+            alertify.success('Thêm vào giỏ hàng thành công' + result.productName);
         },
         error: function (error) {
             console.log(error);
@@ -31,7 +31,7 @@ function deleteItemcart(url) {
 
 function formatPrice() {
     // price Format for frontend
-    var formatter = new Intl.NumberFormat('VND', {
+    var      = new Intl.NumberFormat('VND', {
         style: 'currency',
         currency: 'VND',
         minimumFractionDigits: 0
@@ -57,10 +57,15 @@ function checkoutinfo123(data) {
             console.log(result.obj);
         },
         error: function (error) {
-
+            alert(error);
         }
     })
 }
+
+// function addMoreProduct() {
+//     var count = $('#product-quantity').val();
+//     return count;
+// }
 
 $(document).ready(function () {
 
@@ -88,7 +93,7 @@ $(document).ready(function () {
         })
         checkoutinfo123(JSON.stringify(cartinfo));
     }
-    
+
     // button payment click submit form.
     $('.payment__btn .active .test').on('click', function (e) {
         e.preventDefault();
@@ -97,5 +102,10 @@ $(document).ready(function () {
 
     /* FORM CHECKOUT / END */
 
+    $('.product-quantity-price').on('change', function(){
+        var total = $(this).parent().next().children().text();
+        var result = total.substring(0, total.length - 1);
+        console.log(parseInt(result.trim()));
+    })
 
 })

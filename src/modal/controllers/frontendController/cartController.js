@@ -37,7 +37,10 @@ let addToCart = async (req, res, next) => {
         item_send.nameProduct = productAddToCart.name;
         item_send.imageProduct = productAddToCart.image;
         // sau khi lưu vào session thành công thì trả về cho client bằng ajax
-        return res.status(200).send(item_send);
+        let result = {
+            productName : item_send.nameProduct
+        }
+        return res.status(200).send(result);
 
     } catch (error) {
         console.log(error);

@@ -30,7 +30,7 @@ configSesstion(app);
 app.use(passport.initialize())
 app.use(passport.session());
 
-//initRoutesBackend(app);
+//initRoutes(app);
 initRoutesFrontend(app);
 app.use('/admin', admin);
 
