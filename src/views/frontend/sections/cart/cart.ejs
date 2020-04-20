@@ -112,8 +112,9 @@
                             </thead>
                             <tbody>
                                 <% if(carts) { %>
+                                <small class="hidden"> <%= stringCarts %> </small>
                                 <% for (var key in carts.items) { %>
-                                <tr>
+                                <tr class="item">
                                     <td class="product-thumbnail"><a href="#"><img
                                                 src="/assets/images/products/<%= carts.items[key].item.image[0] %>"
                                                 alt="product img" /></a></td>
@@ -126,7 +127,9 @@
                                     </td>
                                     <td class="product-price"><span class="amount price-transform">
                                             <%= carts.items[key].item.price %></span></td>
-                                    <td class="product-quantity"><input class="product-quantity-price" type="number"
+                                    <td class="product-quantity"><input class="variantID" type="hidden" name="variantId"
+                                            value="<%= carts.items[key].item._id %>"><input
+                                            class="product-quantity-price" maxlength="12" min="1" max="12" type="number"
                                             value="<%= carts.items[key].Qty %>" /> </td>
                                     <td class="product-subtotal"> <span class="price-transform">
                                             <%= carts.items[key].price %> </span> </td>

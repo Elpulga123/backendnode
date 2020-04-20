@@ -11,9 +11,11 @@ let getAllCart = async (req, res, next) => {
 
     try {
         var carts = req.session.cartSess;
+        var stringCarts = JSON.stringify(carts);
         res.render('frontend/sections/cart/cart', {
             title: 'giỏ hàng',
-            carts: carts
+            carts: carts,
+            stringCarts : stringCarts
         })
 
     } catch (error) {
@@ -69,11 +71,16 @@ let deleteItemCart = async (req, res, next) => {
 
 // thực hiện chuyển link đến đường dẫn thanh toán.
 let checkout = (req, res, next) => {
+
     var carts = req.session.cartSess;
+    var stringCarts = JSON.stringify(carts);
+    res.send(stringCarts);
     res.render('frontend/sections/cart/checkout', {
         title: 'Thông tin thanh toán',
-        carts: carts
-    })
+        carts: carts,
+        stringCarts : stringCarts
+    });
+
 }
 
 // lấy thông tin từ form của khách hàng
@@ -90,7 +97,6 @@ let checkoutInfo = (req, res, next) => {
     // let animal_names = obj.map((animal, index) => {
     //     return animal.name
     // })
-
     // const create_payment_json = {
     //     "intent": "sale",
     //     "payer": {
@@ -117,7 +123,6 @@ let checkoutInfo = (req, res, next) => {
     //         "description": "Hat for the best team ever"
     //     }]
     // };
-
     // // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
     // paypal.payment.create(create_payment_json, function (error, payment) {
     //     if (error) {

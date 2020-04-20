@@ -14,6 +14,20 @@ function addtocart(url) {
     })
 }
 
+// function updatetocart(url) {
+//     $.ajax({
+//         type: "GET",
+//         url: "/checkout",
+//         success: function (data) {
+//             console.log(data.carts);
+//         },
+//         error: function (jqXHR, textStatus, errorThrown) {
+//             alert(jqXHR.status);
+//         },
+//         dataType: "jsonp"
+//     })
+// }
+
 function deleteItemcart(url) {
     $.ajax({
         url: url,
@@ -31,7 +45,7 @@ function deleteItemcart(url) {
 
 function formatPrice() {
     // price Format for frontend
-    var      = new Intl.NumberFormat('VND', {
+    var formatter = new Intl.NumberFormat('VND', {
         style: 'currency',
         currency: 'VND',
         minimumFractionDigits: 0
@@ -40,7 +54,7 @@ function formatPrice() {
     var priceFormats = $(".price-transform");
     priceFormats.each(function (index) {
         var price = parseInt($(this).text())
-        $(this).text(formatter.format(price));
+        //$(this).text(formatter.format(price));
     });
 }
 
@@ -100,12 +114,33 @@ $(document).ready(function () {
         checkoutForm();
     })
 
+
+    // updatetocart();
+
     /* FORM CHECKOUT / END */
 
-    $('.product-quantity-price').on('change', function(){
-        var total = $(this).parent().next().children().text();
-        var result = total.substring(0, total.length - 1);
-        console.log(parseInt(result.trim()));
+    $('.product-quantity-price').on('change', function () {
+
+
+        // totalVal = $(this).parent().next().children();
+        // //result = parseInt(total.substring(0, total.length - 1).trim(),
+        // result = parseInt(total),
+        // count = $(this).val(),
+        // itemtotalPrice = result*count;
+        // totalVal.text(itemtotalPrice);
+        var id = $(this).prev().val(),
+        cartsItem = $('.item');
+
+        console.log(id);
+        cartsItem.each(function (index, value) {
+            var id_ = $(this).find($('.variantID')),
+            id_v = id_.val();
+            if(id_v == id){
+                console.log('yes');
+            }
+        })
+
+
     })
 
 })
