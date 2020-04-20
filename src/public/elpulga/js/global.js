@@ -76,10 +76,24 @@ function checkoutinfo123(data) {
     })
 }
 
-// function addMoreProduct() {
-//     var count = $('#product-quantity').val();
-//     return count;
-// }
+function addMoreProduct() {
+    $('.product-quantity-price').on('change', function () {
+        var id = $(this).prev().val(),
+        cartsItem = $('.item');
+        cartsItem.each(function (index, value) {
+            var id_ = $(this).find($('.variantID'))
+            id_v = id_.val();
+            if(id_v == id){
+               var count = $(this).find($('.product-quantity-price')),
+               originalPriceCollection = $(this).find($('.product-price')),
+               originalPrice = originalPriceCollection.text().trim(),
+               totlalPriceCollections = $(this).find($('.product-subtotal'));
+               totalPrice = parseInt(originalPrice) * count.val();
+               totlalPriceCollections.text(totalPrice);
+            }
+        })
+    })
+}
 
 $(document).ready(function () {
 
@@ -92,8 +106,10 @@ $(document).ready(function () {
         addtocart(url);
     });
 
-    // hàm formart tiền
+    // FORMAT CURRENCY
     formatPrice();
+
+    
     /* FORM CHECKOUT / START */
 
     var formcheckout = new FormData();
@@ -115,32 +131,8 @@ $(document).ready(function () {
     })
 
 
-    // updatetocart();
+    addMoreProduct();
 
     /* FORM CHECKOUT / END */
-
-    $('.product-quantity-price').on('change', function () {
-
-
-        // totalVal = $(this).parent().next().children();
-        // //result = parseInt(total.substring(0, total.length - 1).trim(),
-        // result = parseInt(total),
-        // count = $(this).val(),
-        // itemtotalPrice = result*count;
-        // totalVal.text(itemtotalPrice);
-        var id = $(this).prev().val(),
-        cartsItem = $('.item');
-
-        console.log(id);
-        cartsItem.each(function (index, value) {
-            var id_ = $(this).find($('.variantID')),
-            id_v = id_.val();
-            if(id_v == id){
-                console.log('yes');
-            }
-        })
-
-
-    })
 
 })
