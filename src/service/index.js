@@ -1,7 +1,7 @@
-import {register_service, veryfiAccount} from './authservice';
-import {updateUserService} from './userService';
+import { register_service, veryfiAccount } from './authservice';
+import { updateUserService } from './userService';
 
-import { 
+import {
     addProductService,
     getAllProducts,
     updateProductService,
@@ -11,18 +11,23 @@ import {
     updateProductImageService,
 
 
-    getProductDetailService,} from './productService';
+    getProductDetailService,
+} from './productService';
 
-    import {getAllSliders,
-        addSliderService,
-        updateSliderService,
-        updateSliderPost,
-        findSliderByIdService,
-        deleteSliderService} from './sliderService';
+import {
+    getAllSliders,
+    addSliderService,
+    updateSliderService,
+    updateSliderPost,
+    findSliderByIdService,
+    deleteSliderService
+} from './sliderService';
+
+import { addCartService } from './cartService';
 
 
 module.exports = {
-    
+
     register_service,
     veryfiAccount,
     updateUserService,
@@ -47,7 +52,10 @@ module.exports = {
 
     //frontend
     getProductDetailService,
-    
+
+
+    // cartservice
+    addCartService
 
 
 }

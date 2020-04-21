@@ -76,20 +76,47 @@ function checkoutinfo123(data) {
     })
 }
 
+function cartAddMoreItem(data) {
+    $.ajax({
+        url: '/add-cart',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: data,
+        cache: false,
+        processData: false,
+        success: function (result) {
+            console.log(result.obj);
+        },
+        error: function (error) {
+            alert(error);
+        }
+    })
+}
+
 function addMoreProduct() {
     $('.product-quantity-price').on('change', function () {
         var id = $(this).prev().val(),
-        cartsItem = $('.item');
-        cartsItem.each(function (index, value) {
+            itemsCart = {},
+            carttotal = $('.cart__price .price-transform').text();
+            cartsItem = $('.item');
+            cartsItem.each(function (index, value) {
             var id_ = $(this).find($('.variantID'))
             id_v = id_.val();
-            if(id_v == id){
-               var count = $(this).find($('.product-quantity-price')),
-               originalPriceCollection = $(this).find($('.product-price')),
-               originalPrice = originalPriceCollection.text().trim(),
-               totlalPriceCollections = $(this).find($('.product-subtotal'));
-               totalPrice = parseInt(originalPrice) * count.val();
-               totlalPriceCollections.text(totalPrice);
+            if (id_v == id) {
+                var count = $(this).find($('.product-quantity-price')),
+                originalPriceCollection = $(this).find($('.product-price')),
+                originalPrice = originalPriceCollection.text().trim(),
+                totlalPriceCollections = $(this).find($('.product-subtotal'));
+                totalPrice = parseInt(originalPrice) * count.val();
+
+
+                itemsCart.id = id;
+                itemsCart.count = parseInt(count.val());
+                cartAddMoreItem(JSON.stringify(itemsCart));
+                totlalPriceCollections.text(totalPrice);
+
+
             }
         })
     })
@@ -109,7 +136,7 @@ $(document).ready(function () {
     // FORMAT CURRENCY
     formatPrice();
 
-    
+
     /* FORM CHECKOUT / START */
 
     var formcheckout = new FormData();

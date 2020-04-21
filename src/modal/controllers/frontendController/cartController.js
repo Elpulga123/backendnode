@@ -15,7 +15,7 @@ let getAllCart = async (req, res, next) => {
         res.render('frontend/sections/cart/cart', {
             title: 'giỏ hàng',
             carts: carts,
-            stringCarts : stringCarts
+            stringCarts: stringCarts
         })
 
     } catch (error) {
@@ -28,6 +28,7 @@ let getAllCart = async (req, res, next) => {
 let addToCart = async (req, res, next) => {
 
     try {
+       
         var item_send = {};
         var id = req.params.id;
         var cart = new Cart(req.session.cartSess ? req.session.cartSess : {});
@@ -38,11 +39,47 @@ let addToCart = async (req, res, next) => {
         item_send.carttotal = cart.quanity;
         item_send.nameProduct = productAddToCart.name;
         item_send.imageProduct = productAddToCart.image;
+
         // sau khi lưu vào session thành công thì trả về cho client bằng ajax
         let result = {
-            productName : item_send.nameProduct
+            productName: item_send.nameProduct
         }
         return res.status(200).send(result);
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send('Lôi');
+    }
+}
+
+// FORM FRONTEND ADD MORR QUANTITY FOR CART
+let addCountToCart = async (req, res, next) => {
+
+    try {
+        let cartModel = {};
+        var item_send = {};
+        let count = req.body.count,
+        id = req.body.id;
+        console.log(count)
+        var cart = new Cart(req.session.cartSess ? req.session.cartSess : {});
+        // let productAddToCart = await service.findProductByIdService(req.params.id);
+        // // thêm item mới vào cart
+        cart.addCount(count, id);
+        req.session.cartSess = cart;
+        // item_send.carttotal = cart.quanity;
+        // item_send.nameProduct = productAddToCart.name;
+        // item_send.imageProduct = productAddToCart.image;
+        // // sau khi lưu vào session thành công thì trả về cho client bằng ajax
+        // let result = {
+        //     productName : item_send.nameProduct
+        // }
+        // return res.status(200).send(result);
+
+        //cartModel.items = cart.items;
+
+        // req.user._id được lưu ở session khi đăng nhập
+        //let addCartService = await service.addCartService(cartModel);
+        //console.log(typeof addCartService);
 
     } catch (error) {
         console.log(error);
@@ -78,7 +115,7 @@ let checkout = (req, res, next) => {
     res.render('frontend/sections/cart/checkout', {
         title: 'Thông tin thanh toán',
         carts: carts,
-        stringCarts : stringCarts
+        stringCarts: stringCarts
     });
 
 }
@@ -173,5 +210,6 @@ module.exports = {
     deleteItemCart,
     checkout,
     checkoutInfo,
-    paymentSuccess
+    paymentSuccess,
+    addCountToCart
 }

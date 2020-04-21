@@ -20,9 +20,23 @@ function Cart(oldCart) {
         this.totalPrice += storedItem.price;
     };
 
+    this.addCount = function (count, id){
+        var storedItem = this.items[id];
+        if (!storedItem) {
+            storedItem = this.items[id] = {
+                item: item,
+                Qty: 0,
+                price: 0
+            }
+        }
+        storedItem.Qty = count;
+        storedItem.price = storedItem.Qty * this.items[id].price;
+        this.quanity++;
+        this.totalPrice += storedItem.price;
+    }
+
     // method xóa
     this.delete = function (item, id) {
-
         var storedItem = this.items[id];
         storedItem.Qty--;
         this.quanity -= storedItem.Qty;

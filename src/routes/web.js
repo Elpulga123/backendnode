@@ -24,6 +24,7 @@ export let initRoutesFrontend = (app) => {
   router.get('/checkout', controllerFrontend.checkout);
   router.post('/payment',controllerFrontend.checkoutInfo);
   router.get('/success', controllerFrontend.paymentSuccess);
+  router.post('/add-cart', controllerFrontend.addCountToCart);
 
   return app.use('/', router);
 }
