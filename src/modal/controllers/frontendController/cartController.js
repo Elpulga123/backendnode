@@ -11,6 +11,7 @@ let getAllCart = async (req, res, next) => {
 
     try {
         var carts = req.session.cartSess;
+        console.log(carts);
         var stringCarts = JSON.stringify(carts);
         res.render('frontend/sections/cart/cart', {
             title: 'giỏ hàng',
@@ -53,27 +54,27 @@ let addToCart = async (req, res, next) => {
 }
 
 // FORM FRONTEND ADD MORR QUANTITY FOR CART
-let addCountToCart = async (req, res, next) => {
+let addCountToCart = (req, res, next) => {
 
     try {
         let cartModel = {};
         var item_send = {};
         let count = req.body.count,
         id = req.body.id;
-        console.log(count)
-        var cart = new Cart(req.session.cartSess ? req.session.cartSess : {});
+        console.log(count);
+        var cart_02 = new Cart(req.session.cartSess ? req.session.cartSess : {});
         // let productAddToCart = await service.findProductByIdService(req.params.id);
         // // thêm item mới vào cart
-        cart.addCount(count, id);
-        req.session.cartSess = cart;
-        // item_send.carttotal = cart.quanity;
-        // item_send.nameProduct = productAddToCart.name;
-        // item_send.imageProduct = productAddToCart.image;
-        // // sau khi lưu vào session thành công thì trả về cho client bằng ajax
-        // let result = {
-        //     productName : item_send.nameProduct
-        // }
-        // return res.status(200).send(result);
+        cart_02.addCount(count, id);
+        req.session.cartSess = cart_02;
+        console.log(cart_02.items[id].Qty);
+        // console.log('Danh sách session carts');
+        // console.log(req.session.cartSess);
+
+        let result = {
+            totalCart : cart_02.quanity
+        }
+        return res.status(200).send(result);
 
         //cartModel.items = cart.items;
 

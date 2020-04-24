@@ -86,7 +86,7 @@ function cartAddMoreItem(data) {
         cache: false,
         processData: false,
         success: function (result) {
-            console.log(result.obj);
+            console.log(result.totalCart);
         },
         error: function (error) {
             alert(error);

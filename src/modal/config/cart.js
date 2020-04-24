@@ -20,7 +20,7 @@ function Cart(oldCart) {
         this.totalPrice += storedItem.price;
     };
 
-    this.addCount = function (count, id){
+    this.addCount = function (count, id) {
         var storedItem = this.items[id];
         if (!storedItem) {
             storedItem = this.items[id] = {
@@ -29,11 +29,22 @@ function Cart(oldCart) {
                 price: 0
             }
         }
-        storedItem.Qty = count;
-        storedItem.price = storedItem.Qty * this.items[id].price;
-        this.quanity++;
+
+        if (storedItem.Qty > count) {
+            storedItem.Qty = count;
+            storedItem.price = storedItem.Qty * this.items[id].price;
+            this.quanity--;
+
+        }
+
+        if (storedItem.Qty < count) {
+            storedItem.Qty = count;
+            storedItem.price = storedItem.Qty * this.items[id].price;
+            this.quanity++;
+
+        }
         this.totalPrice += storedItem.price;
-    }
+    };
 
     // method xóa
     this.delete = function (item, id) {
@@ -42,7 +53,6 @@ function Cart(oldCart) {
         this.quanity -= storedItem.Qty;
         this.totalPrice -= storedItem.price;
         delete this.items[id];
-        
     }
 }
 
