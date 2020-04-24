@@ -110,7 +110,6 @@ function addMoreProduct() {
                 totlalPriceCollections = $(this).find($('.product-subtotal'));
                 totalPrice = parseInt(originalPrice) * count.val();
 
-
                 itemsCart.id = id;
                 itemsCart.count = parseInt(count.val());
                 cartAddMoreItem(JSON.stringify(itemsCart));

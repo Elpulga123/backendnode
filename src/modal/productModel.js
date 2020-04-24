@@ -35,4 +35,4 @@ ProductSchema.statics = {
 }
 
 const productsModel = mongoose.model('products', ProductSchema);
-export { productsModel }
+export { productsModel, ProductSchema}
