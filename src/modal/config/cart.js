@@ -29,7 +29,7 @@ function Cart(oldCart) {
                 price: 0
             }
         }
-
+        
         if (storedItem.Qty > count) {
             storedItem.Qty = count;
             storedItem.price = storedItem.Qty * this.items[id].price;
@@ -41,7 +41,6 @@ function Cart(oldCart) {
             storedItem.Qty = count;
             storedItem.price = storedItem.Qty * this.items[id].price;
             this.quanity++;
-
         }
         this.totalPrice += storedItem.price;
     };
