@@ -37,7 +37,7 @@ let addProduct = (req, res, next) => {
 
     productUploadFile(req, res, async (error) => {
         try {
-            
+
             var image = req.body.image_path.split(",");
             productItem.image = image;
             productItem.name = req.body.product_name;
@@ -117,7 +117,7 @@ let editAddProductImage = (req, res, next) => {
 // chỉnh sửa thông tin sản phẩm
 let editProduct = async (req, res, next) => {
     let successArr = [];
-    
+
     try {
         let productEdit = await service.updateProductService(req.params.id);
         successArr.push(TranProductSuccess.editSuccess);
@@ -166,9 +166,12 @@ let editProductPost = (req, res, next) => {
             // tìm phần tử và cập nhật đường dẫn;
             let productEdit = await service.findProductByIdService(req.params.id);
             productItem.image = productEdit.image;
-            var image = req.body.image_path.split(",");
-            for(var index = 0; index < image.length; index++){
-              productItem.image.push(image[index]);
+
+            if (req.body.image_path) {
+                var image = req.body.image_path.split(",");
+                for (var index = 0; index < image.length; index++) {
+                    productItem.image.push(image[index]);
+                }
             }
 
             if (req.body.product_count < 1) {
@@ -179,10 +182,10 @@ let editProductPost = (req, res, next) => {
             // nếu có thay đổi hình ảnh thì vào đây.
             productItem.updateAt = Date.now();
             // Cập nhật sư, cập nhật hình ảnh và đường dẫn.
-        
+
             let productUpdate = await service.updateProductPost(req.params.id, productItem);
             return res.redirect('/admin/products');
-            
+
 
         } catch (error) {
             console.log(error);
@@ -209,7 +212,7 @@ let updateProductImage = (req, res, next) => {
                 let userupdate = await service.updateProductImageService(req.params.id, oldproduct);
                 await fsExtras.remove(`${app.directory_product}/${userOldImage}`);
 
-                let result = {  
+                let result = {
                     message: Transuccess.product_updated,
                     imageSrc: req.file.filename
                 }
@@ -257,12 +260,15 @@ let deleteProductImage = async (req, res, next) => {
         let oldproduct = await service.findProductByIdService(id);
         oldproduct.image.splice(index, 1);
         let delete_image = oldproduct.image[index];
+
         let productUpdate = await service.updateProductImageService(id, oldproduct);
-        await fsExtras.remove(`${app.directory_products}/${delete_image}`);
+        await fsExtras.remove(`${app.directory_products}/${oldproduct.image[index]}`);
+
+
 
         successArr.push(TranProductSuccess.deleteProducts);
         req.flash('Success', successArr);
-        return res.redirect('/admin/product/edit_product/'+ id);
+        return res.redirect('/admin/product/edit_product/' + id);
 
 
     } catch (error) {

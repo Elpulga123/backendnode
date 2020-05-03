@@ -194,37 +194,44 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
-                                                    <input type="text" name="first_name" id="bill-firstname" placeholder="First name">
+                                                    <input type="text" name="first_name" id="bill-firstname"
+                                                        placeholder="First name">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
-                                                    <input type="text"  name="last_name" id="bill-lastname" placeholder="Last name">
+                                                    <input type="text" name="last_name" id="bill-lastname"
+                                                        placeholder="Last name">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="single-input">
-                                                    <input type="text" name="company_name" id="bill-firstname" placeholder="Company name">
+                                                    <input type="text" name="company_name" id="bill-firstname"
+                                                        placeholder="Company name">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="single-input">
-                                                    <input type="text" name="street" id="bill-address" placeholder="Street Address">
+                                                    <input type="text" name="street" id="bill-address"
+                                                        placeholder="Street Address">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="single-input">
-                                                    <input type="text" name="apartment" id="bill-apartment" placeholder="Apartment/Block/House (optional)">
+                                                    <input type="text" name="apartment" id="bill-apartment"
+                                                        placeholder="Apartment/Block/House (optional)">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
-                                                    <input type="email" name="email" id="bill-email" placeholder="Email address">
+                                                    <input type="email" name="email" id="bill-email"
+                                                        placeholder="Email address">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
-                                                    <input type="text" name="phone" id="bill-phone" placeholder="Phone number">
+                                                    <input type="text" name="phone" id="bill-phone"
+                                                        placeholder="Phone number">
                                                 </div>
                                             </div>
                                         </div>
@@ -421,37 +428,28 @@
             </div>
             <div class="col-md-4">
                 <div class="order-details">
-                    <h5 class="order-details__title">Your Order</h5>
+                    <h5 class="order-details__title"> Giỏ hàng </h5>
+                    <% if(carts) { %>
                     <div class="order-details__item">
+                        <% for (var key in carts.items) { %>
                         <div class="single-item">
                             <div class="single-item__thumb">
-                                <img src="images/cart/1.png" alt="ordered item">
+                                <img src="/assets/images/products/<%= carts.items[key].item.image[0] %>" alt="ordered item">
                             </div>
                             <div class="single-item__content">
-                                <a href="#">Santa fe jacket for men</a>
-                                <span class="price">$128</span>
+                                <a href="/product/<%= carts.items[key].item._id %>"><%= carts.items[key].item.name %></a>
+                                <span class="price"> <%= carts.items[key].item.price %></span>
                             </div>
                             <div class="single-item__remove">
                                 <a href="#"><i class="zmdi zmdi-delete"></i></a>
                             </div>
                         </div>
-                        <div class="single-item">
-                            <div class="single-item__thumb">
-                                <img src="images/cart/2.png" alt="ordered item">
-                            </div>
-                            <div class="single-item__content">
-                                <a href="#">Santa fe jacket for men</a>
-                                <span class="price">$128</span>
-                            </div>
-                            <div class="single-item__remove">
-                                <a href="#"><i class="zmdi zmdi-delete"></i></a>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                     <div class="order-details__count">
                         <div class="order-details__count__single">
                             <h5>sub total</h5>
-                            <span class="price">$909.00</span>
+                            <span class="price"><%= carts.totalPrice %></span>
                         </div>
                         <div class="order-details__count__single">
                             <h5>Tax</h5>
@@ -466,6 +464,8 @@
                         <h5>Order total</h5>
                         <span class="price">$918.00</span>
                     </div>
+
+                    <% } %>
                     <div class="order-details__total">
                         <ul class="payment__btn">
                             <li class="active"><a class="test" href="/payment"> Payment </a></li>

@@ -112,7 +112,6 @@
                             </thead>
                             <tbody>
                                 <% if(carts) { %>
-                                <small class="hidden"> <%= stringCarts %> </small>
                                 <% for (var key in carts.items) { %>
                                 <tr class="item">
                                     <td class="product-thumbnail"><a href="product/<%= carts.items[key].item._id %>"><img
@@ -193,7 +192,7 @@
                                         </div>
                                         <div class="cart__total">
                                             <span>order total</span>
-                                            <span><%= carts.items[key].totalPrice %></span>
+                                            <span><%= carts.totalPrice %></span>
                                         </div>
                                         <ul class="payment__btn">
                                             <li class="active"><a href="/checkout">payment</a></li>
@@ -204,45 +203,7 @@
                                 <%}%>
                                 <% if(!carts) {%>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="ht__coupon__code">
-                                            <span>enter your discount code</span>
-                                            <div class="coupon__box">
-                                                <input type="text" placeholder="">
-                                                <div class="ht__cp__btn">
-                                                    <a href="#">enter</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12 smt-40 xmt-40">
-                                        <div class="htc__cart__total">
-                                            <h6>cart total</h6>
-                                            <div class="cart__desk__list">
-                                                <ul class="cart__desc">
-                                                    <li>cart total</li>
-                                                    <li>tax</li>
-                                                    <li>shipping</li>
-                                                </ul>
-                                                payment
-                                                <ul class="cart__price">
-                                                    <li> <span class="price-transform"> 0 </span>
-                                                        <span> đ
-                                                        </span></li>
-                                                    <li>$0.00</li>
-                                                    <li>0</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="cart__total">
-                                            <span>order total</span>
-                                            <span>0</span>
-                                        </div>
-                                        <ul class="payment__btn">
-                                            <li class="active"><a href="/checkout">payment</a></li>
-                                            <li><a href="/">continue shopping</a></li>
-                                        </ul>
-                                    </div>
+                                    <span class="badge badge-pill badge-primary"> Chưa có sản phẩm nào trong giỏ hàng ! </span>
                                 </div>
                                 <%}%>
 </div>

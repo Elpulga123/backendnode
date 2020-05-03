@@ -29,17 +29,16 @@ function Cart(oldCart) {
                 price: 0
             }
         }
-        
         if (storedItem.Qty > count) {
             storedItem.Qty = count;
-            storedItem.price = storedItem.Qty * this.items[id].price;
+            this.totalPrice -= storedItem.price;
+            storedItem.price = storedItem.Qty * this.items[id].item.price;
             this.quanity--;
-
         }
-
         if (storedItem.Qty < count) {
             storedItem.Qty = count;
-            storedItem.price = storedItem.Qty * this.items[id].price;
+            this.totalPrice -= storedItem.price;
+            storedItem.price = storedItem.Qty * this.items[id].item.price;
             this.quanity++;
         }
         this.totalPrice += storedItem.price;
@@ -48,7 +47,6 @@ function Cart(oldCart) {
     // method xóa
     this.delete = function (item, id) {
         var storedItem = this.items[id];
-        storedItem.Qty--;
         this.quanity -= storedItem.Qty;
         this.totalPrice -= storedItem.price;
         delete this.items[id];

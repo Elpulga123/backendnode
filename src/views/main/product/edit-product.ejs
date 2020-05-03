@@ -141,10 +141,8 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
-                                                <div class="form-group">
-                                                    <input type="hidden" name="image_path" id="image_path"
-                                                        class="form-control form-bg-inverse"
-                                                        placeholder="Đường dẫn sản phẩm">
+                                                <div class="form-group" id="image_path_form">
+                                                 
                                                 </div>
                                                 <label class="font-weight-bold" for="product_brand"> Thương Hiệu
                                                 </label>
@@ -190,7 +188,7 @@
                                         <div class="col-xs-12 col-md-12">
                                             <button type="submit" class="btn btn-primary mt-4 mb-4"
                                                 id="save-button-product-image"
-                                                data-url='/admin/product-add-edit/<%= product._id %>'>
+                                                data-url='/admin/product/product-add-edit/<%= product._id %>'>
                                                 <i class="icofont icofont-save"></i> Lưu
                                             </button>
                                         </div>

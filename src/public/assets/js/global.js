@@ -245,12 +245,12 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
         var urlOption = '';
 
         myDropzone.on('click', function () {
-           
+            console.log('aloha s')
         })
 
         // lắng nghe mỗi khi thêm file.
         this.on("addedfile", function (file) {
-            //myDropzone.processQueue();
+            console.log('aloha v')
         });
 
         // sau khi upload xong thì set các giá trị về 0
@@ -275,7 +275,6 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
                 }
                 // thiết lập dữ liệu cho input bên frontend để truyền lên server
                 $('#image_path').val(imgPathArrr);
-                console.log(imgPathArrr);
                 $("#product_form").submit();
 
             } else {
@@ -288,24 +287,26 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
         $('#save-button-product-image').on('click', function (param) {
 
             urlOption = $(this).attr('data-url');
-            myDropzone.options.url = urlOption;
-            myDropzone.processQueue();
             var imgPathArrr = [];
 
             if (myDropzone.files != "") {
-
+                $( "#image_path_form" ).append(
+                "<input type='hidden' name='image_path' id='image_path'"
+                + "class='form-control form-bg-inverse'"
+                + "placeholder='Đường dẫn sản phẩm'>" 
+                );
+                myDropzone.url = urlOption;
+                myDropzone.processQueue();
                 for (var index = 0; index < myDropzone.files.length; index++) {
                     imgPathArrr.push(myDropzone.files[index].upload.filename);
                 }
-                // thiết lập dữ liệu cho input bên frontend để truyền lên server
                 $('#image_path').val(imgPathArrr);
-
-            } else {
                 $("#product-edit-form").submit(function () {
-                    alert("Submitted");
+
                 });
-                console.log('File đã được Submit');
-                return false;
+            } else {
+
+                $("#product-edit-form").submit();
             }
         })
 
