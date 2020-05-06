@@ -59,15 +59,15 @@ let addCountToCart = (req, res, next) => {
     try {
         let cartModel = {};
         var item_send = {};
-        let count = req.body.count,
+        let {count} = req.body,
         id = req.body.id;
         var cart_02 = new Cart(req.session.cartSess ? req.session.cartSess : {});
         cart_02.addCount(count, id);
         req.session.cartSess = cart_02;
-        console.log(cart_02.items[id].Qty);
 
         let result = {
-            totalCart : cart_02.quanity
+            totalCart : cart_02.quanity,
+            itemTotal : cart_02.items[id].price
         }
         return res.status(200).send(result);
 

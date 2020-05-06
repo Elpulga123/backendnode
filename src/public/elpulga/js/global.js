@@ -14,19 +14,6 @@ function addtocart(url) {
     })
 }
 
-// function updatetocart(url) {
-//     $.ajax({
-//         type: "GET",
-//         url: "/checkout",
-//         success: function (data) {
-//             console.log(data.carts);
-//         },
-//         error: function (jqXHR, textStatus, errorThrown) {
-//             alert(jqXHR.status);
-//         },
-//         dataType: "jsonp"
-//     })
-// }
 
 function deleteItemcart(url) {
     $.ajax({
@@ -43,7 +30,7 @@ function deleteItemcart(url) {
 }
 
 
-function formatPrice() {
+function formatPrice(text) {
     // price Format for frontend
     var formatter = new Intl.NumberFormat('VND', {
         style: 'currency',
@@ -54,7 +41,7 @@ function formatPrice() {
     var priceFormats = $(".price-transform");
     priceFormats.each(function (index) {
         var price = parseInt($(this).text())
-        //$(this).text(formatter.format(price));
+        $(this).text(formatter.format(price));
     });
 }
 
@@ -68,7 +55,7 @@ function checkoutinfo123(data) {
         cache: false,
         processData: false,
         success: function (result) {
-            console.log(result.obj);
+            
         },
         error: function (error) {
             alert(error);
@@ -86,7 +73,7 @@ function cartAddMoreItem(data) {
         cache: false,
         processData: false,
         success: function (result) {
-            console.log(result.totalCart);
+            addMoreProduct(result.itemTotal);
         },
         error: function (error) {
             alert(error);
@@ -94,28 +81,37 @@ function cartAddMoreItem(data) {
     })
 }
 
-function addMoreProduct() {
+function addMoreProduct(price) {
     $('.product-quantity-price').on('change', function () {
         var id = $(this).prev().val(),
-            itemsCart = {},
-            carttotal = $('.cart__price .price-transform').text();
-            cartsItem = $('.item');
-            cartsItem.each(function (index, value) {
-            var id_ = $(this).find($('.variantID'))
+        itemsCart = {},
+        carttotal = $('.cart__price .price-transform').text();
+        cartsItem = $('.item');
+        cartsItem.each(function (index, value) {
+
+            var id_ = $(this).find($('.variantID'));
             id_v = id_.val();
             if (id_v == id) {
+
                 var count = $(this).find($('.product-quantity-price')),
                 originalPriceCollection = $(this).find($('.product-price')),
-                originalPrice = originalPriceCollection.text().trim(),
+                originalPriceTransform = originalPriceCollection.find($('.price-transform')),
+                originalPrice = originalPriceTransform.attr('data-price');
                 totlalPriceCollections = $(this).find($('.product-subtotal'));
                 totalPrice = parseInt(originalPrice) * count.val();
+
 
                 itemsCart.id = id;
                 itemsCart.count = parseInt(count.val());
                 cartAddMoreItem(JSON.stringify(itemsCart));
-                totlalPriceCollections.text(totalPrice);
-
-
+                
+                var priceTransfrom = totlalPriceCollections.find($('.price-transform'));
+                var formatter = new Intl.NumberFormat('VND', {
+                    style: 'currency',
+                    currency: 'VND',
+                    minimumFractionDigits: 0
+                });
+                priceTransfrom.text(formatter.format(totalPrice));
             }
         })
     })

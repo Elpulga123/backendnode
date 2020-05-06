@@ -114,7 +114,8 @@
                                 <% if(carts) { %>
                                 <% for (var key in carts.items) { %>
                                 <tr class="item">
-                                    <td class="product-thumbnail"><a href="product/<%= carts.items[key].item._id %>"><img
+                                    <td class="product-thumbnail"><a
+                                            href="product/<%= carts.items[key].item._id %>"><img
                                                 src="/assets/images/products/<%= carts.items[key].item.image[0] %>"
                                                 alt="product img" /></a></td>
                                     <td class="product-name"><a href=""><%= carts.items[key].item.name %></a>
@@ -125,13 +126,17 @@
                                         </ul>
                                     </td>
                                     <td class="product-price">
-                                            <%= carts.items[key].item.price %></td>
+                                        <span data-price="<%= carts.items[key].item.price %>" class="price-transform">
+                                            <%= carts.items[key].item.price %>
+                                        </span>
+                                    </td>
                                     <td class="product-quantity"><input class="variantID" type="hidden" name="variantId"
                                             value="<%= carts.items[key].item._id %>"><input
                                             class="product-quantity-price" maxlength="12" min="1" max="12" type="number"
                                             value="<%= carts.items[key].Qty %>" /> </td>
-                                    <td class="product-subtotal"> 
-                                            <%= carts.items[key].price %> </td>
+                                    <td class="product-subtotal">
+                                        <span data-price="<%= carts.items[key].price %>" class="price-transform"> <%= carts.items[key].price %> </span>
+                                         </td>
                                     <td class="product-remove"><a
                                             href="/cart/delete_cart/<%= carts.items[key].item._id %>"><i
                                                 class="icon-trash icons"></i></a></td>
@@ -203,7 +208,8 @@
                                 <%}%>
                                 <% if(!carts) {%>
                                 <div class="row">
-                                    <span class="badge badge-pill badge-primary"> Chưa có sản phẩm nào trong giỏ hàng ! </span>
+                                    <span class="badge badge-pill badge-primary"> Chưa có sản phẩm nào trong giỏ hàng !
+                                    </span>
                                 </div>
                                 <%}%>
 </div>
