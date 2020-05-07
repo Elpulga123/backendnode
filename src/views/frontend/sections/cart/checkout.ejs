@@ -434,11 +434,15 @@
                         <% for (var key in carts.items) { %>
                         <div class="single-item">
                             <div class="single-item__thumb">
-                                <img src="/assets/images/products/<%= carts.items[key].item.image[0] %>" alt="ordered item">
+                                <img src="/assets/images/products/<%= carts.items[key].item.image[0] %>"
+                                    alt="ordered item">
                             </div>
                             <div class="single-item__content">
-                                <a href="/product/<%= carts.items[key].item._id %>"><%= carts.items[key].item.name %></a>
-                                <span class="price"> <%= carts.items[key].item.price %></span>
+                                <a
+                                    href="/product/<%= carts.items[key].item._id %>"><%= carts.items[key].item.name %></a>
+                                <span class="price">
+                                    <span class="price-cart"> <%= carts.items[key].item.price %></span>
+                                </span>
                             </div>
                             <div class="single-item__remove">
                                 <a href="#"><i class="zmdi zmdi-delete"></i></a>
@@ -449,7 +453,9 @@
                     <div class="order-details__count">
                         <div class="order-details__count__single">
                             <h5>sub total</h5>
-                            <span class="price"><%= carts.totalPrice %></span>
+                            <span class="price">
+                                <span class="price-cart"> <%= carts.totalPrice %></span>
+                            </span>
                         </div>
                         <div class="order-details__count__single">
                             <h5>Tax</h5>
@@ -462,7 +468,7 @@
                     </div>
                     <div class="ordre-details__total">
                         <h5>Order total</h5>
-                        <span class="price">$918.00</span>
+                        <span class="price"><span class="price-cart"> <%= carts.totalPrice %></span></span>
                     </div>
 
                     <% } %>

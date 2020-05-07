@@ -99,8 +99,7 @@ function addMoreProduct(price) {
                 originalPrice = originalPriceTransform.attr('data-price');
                 totlalPriceCollections = $(this).find($('.product-subtotal'));
                 totalPrice = parseInt(originalPrice) * count.val();
-
-
+                
                 itemsCart.id = id;
                 itemsCart.count = parseInt(count.val());
                 cartAddMoreItem(JSON.stringify(itemsCart));
@@ -130,7 +129,16 @@ $(document).ready(function () {
 
     // FORMAT CURRENCY
     formatPrice();
-
+    var priceFormats = $('.price-cart');
+    var formatter = new Intl.NumberFormat('VND', {
+        style: 'currency',
+        currency: 'VND',
+        minimumFractionDigits: 0
+    });
+    priceFormats.each(function (index) {
+        var price = parseInt($(this).text())
+        $(this).text(formatter.format(price));
+    });
 
     /* FORM CHECKOUT / START */
 

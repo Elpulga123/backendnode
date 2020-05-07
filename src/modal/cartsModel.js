@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 var CartsSchema = new Schema({
     name: String,
-    info: {
-
-    },
+    info: {type:{}, default:{}},
     items: { type: {}, default: {} },
     price: { type: String, default: 'male' },
     status: { type: Boolean, default: false },
