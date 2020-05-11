@@ -58,7 +58,7 @@ function checkoutinfo123(data) {
             
         },
         error: function (error) {
-            alert(error);
+            alert('Lỗi');
         }
     })
 }
@@ -159,8 +159,6 @@ $(document).ready(function () {
         e.preventDefault();
         checkoutForm();
     })
-
-
     addMoreProduct();
 
     /* FORM CHECKOUT / END */

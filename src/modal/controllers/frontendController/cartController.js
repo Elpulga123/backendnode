@@ -3,9 +3,9 @@ import Cart from '../../config/cart';
 import { paymentConfigure } from '../../config/paypal';
 import paypal from 'paypal-rest-sdk';
 
-
 // cấu hình paypal.
 paymentConfigure;
+
 
 let getAllCart = async (req, res, next) => {
 
@@ -29,7 +29,6 @@ let getAllCart = async (req, res, next) => {
 let addToCart = async (req, res, next) => {
 
     try {
-       
         var item_send = {};
         var id = req.params.id;
         var cart = new Cart(req.session.cartSess ? req.session.cartSess : {});
@@ -45,6 +44,7 @@ let addToCart = async (req, res, next) => {
         let result = {
             productName: item_send.nameProduct
         }
+
         return res.status(200).send(result);
 
     } catch (error) {
@@ -59,15 +59,15 @@ let addCountToCart = (req, res, next) => {
     try {
         let cartModel = {};
         var item_send = {};
-        let {count} = req.body,
-        id = req.body.id;
+        let { count } = req.body,
+            id = req.body.id;
         var cart_02 = new Cart(req.session.cartSess ? req.session.cartSess : {});
         cart_02.addCount(count, id);
         req.session.cartSess = cart_02;
 
         let result = {
-            totalCart : cart_02.quanity,
-            itemTotal : cart_02.items[id].price
+            totalCart: cart_02.quanity,
+            itemTotal: cart_02.items[id].price
         }
         return res.status(200).send(result);
 
@@ -116,57 +116,71 @@ let checkout = (req, res, next) => {
 }
 
 // lấy thông tin từ form của khách hàng
-let checkoutInfo = (req, res, next) => {
+let checkoutInfo = async (req, res, next) => {
 
     const objs = req.body; // req.body = [Object: null prototype] { title: 'product' }
     console.log(objs);
     let result = {
         obj: objs
     }
-    if (req.body) {
-        res.send(result);
-    }
+
+    // const CartItem = {};
+    // CartItem.info = req.body;
+    // CartItem.items = req.session.cartSess;
+
+    // let addCarts = await service.addCartService(CartItem).then((val) => {
+    // }).catch((reason) => {
+    //     throw reason;
+    // });
+
+
     // let animal_names = obj.map((animal, index) => {
     //     return animal.name
     // })
-    // const create_payment_json = {
-    //     "intent": "sale",
-    //     "payer": {
-    //         "payment_method": "paypal"
-    //     },
-    //     "redirect_urls": {
-    //         "return_url": "http://localhost:5000/success",
-    //         "cancel_url": "http://localhost:5000/cancel" 
-    //     },
-    //     "transactions": [{
-    //         "item_list": {
-    //             "items": [{
-    //                 "name": "Red Sox Hat",
-    //                 "sku": "001",
-    //                 "price": "25.00",
-    //                 "currency": "USD",
-    //                 "quantity": 1
-    //             }]
-    //         },
-    //         "amount": {
-    //             "currency": "USD",
-    //             "total": "25.00"
-    //         },
-    //         "description": "Hat for the best team ever"
-    //     }]
-    // };
-    // // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
-    // paypal.payment.create(create_payment_json, function (error, payment) {
-    //     if (error) {
-    //         throw error;
-    //     } else {
-    //         for (let i = 0; i < payment.links.length; i++) {
-    //             if (payment.links[i].rel === 'approval_url') {
-    //                  res.redirect(payment.links[i].href);
-    //             }
-    //         }
-    //     }
-    // });
+    
+    const create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:5000/success",
+            "cancel_url": "http://localhost:5000/cancel" 
+        },
+        "transactions": [{
+            "item_list": {
+                "items": [{
+                    "name": "Red Sox Hat",
+                    "sku": "001",
+                    "price": "25.00",
+                    "currency": "USD",
+                    "quantity": 1
+                }]
+            },
+            "amount": {
+                "currency": "USD",
+                "total": "25.00"
+            },
+            "description": "Hat for the best team ever"
+        }]
+    };
+    // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
+    paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+            for (let i = 0; i < payment.links.length; i++) {
+                if (payment.links[i].rel === 'approval_url') {
+                     res.redirect(payment.links[i].href);
+                }
+            }
+        }
+    });
+
+    
+    if (req.body) {
+        res.send(result);
+    }
 }
 
 let paymentSuccess = (req, res, next) => {
