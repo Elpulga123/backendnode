@@ -112,81 +112,105 @@ let checkout = (req, res, next) => {
         carts: carts,
         stringCarts: stringCarts
     });
-
 }
 
 // lấy thông tin từ form của khách hàng
-let checkoutInfo = async (req, res, next) => {
+let checkoutInfo = (req, res, next) => {
 
     const objs = req.body; // req.body = [Object: null prototype] { title: 'product' }
-    console.log(objs);
     let result = {
-        obj: objs
+        obj: objs,
+        redirect : '/checkout-03'
+        
     }
+    return res.status(200).send(result);
+    // // thêm thông tin khách hàng vào session.
+    // req.session.infoSess = req.body;
+    // var carts = req.session.cartSess;
+    // // thêm thông tin khách hàng vào session.
+    // req.session.infoSess = req.body;
+    // var stringCarts = JSON.stringify(carts);
+    // res.render('frontend/sections/cart/checkout-step2', {
+    //     title: 'Thông tin thanh toán',
+    //     carts: carts,
+    //     info : req.session.info,
+    //     stringCarts: stringCarts
+    // });
+
+    return res.redirect('/checkout-03');
 
     // const CartItem = {};
     // CartItem.info = req.body;
     // CartItem.items = req.session.cartSess;
-
     // let addCarts = await service.addCartService(CartItem).then((val) => {
     // }).catch((reason) => {
     //     throw reason;
     // });
-
-
     // let animal_names = obj.map((animal, index) => {
     //     return animal.name
     // })
-    
-    const create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://localhost:5000/success",
-            "cancel_url": "http://localhost:5000/cancel" 
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "Red Sox Hat",
-                    "sku": "001",
-                    "price": "25.00",
-                    "currency": "USD",
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "currency": "USD",
-                "total": "25.00"
-            },
-            "description": "Hat for the best team ever"
-        }]
-    };
-    // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-            for (let i = 0; i < payment.links.length; i++) {
-                if (payment.links[i].rel === 'approval_url') {
-                     res.redirect(payment.links[i].href);
-                }
-            }
-        }
-    });
 
-    
-    if (req.body) {
-        res.send(result);
-    }
+    // const create_payment_json = {
+    //     "intent": "sale",
+    //     "payer": {
+    //         "payment_method": "paypal"
+    //     },
+    //     "redirect_urls": {
+    //         "return_url": "http://localhost:5000/success",
+    //         "cancel_url": "http://localhost:5000/cancel" 
+    //     },
+    //     "transactions": [{
+    //         "item_list": {
+    //             "items": [{
+    //                 "name": "Red Sox Hat",
+    //                 "sku": "001",
+    //                 "price": "25.00",
+    //                 "currency": "USD",
+    //                 "quantity": 1
+    //             }]
+    //         },
+    //         "amount": {
+    //             "currency": "USD",
+    //             "total": "25.00"
+    //         },
+    //         "description": "Hat for the best team ever"
+    //     }]
+    // };
+
+    // // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
+    // paypal.payment.create(create_payment_json, function (error, payment) {
+    //     if (error) {
+    //         throw error;
+    //     } else {
+    //         for (let i = 0; i < payment.links.length; i++) {
+    //             if (payment.links[i].rel === 'approval_url') {
+    //                  res.redirect(payment.links[i].href);
+    //             }
+    //         }
+    //     }
+    // });
+
+}
+
+let checkoutStep2 = (req, res, next) => {
+
+    var carts = req.session.cartSess;
+    // thêm thông tin khách hàng vào session.
+    req.session.infoSess = req.body;
+    var stringCarts = JSON.stringify(carts);
+    res.render('frontend/sections/cart/checkout-step2', {
+        title: 'Thông tin thanh toán',
+        carts: carts,
+        info : req.session.info,
+        stringCarts: stringCarts
+    });
 }
 
 let paymentSuccess = (req, res, next) => {
     // lấy được ID khi payment trả về POST thông tin
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
+
     const execute_payment_json = {
         "payer_id": payerId,
         "transactions": [{
@@ -196,13 +220,15 @@ let paymentSuccess = (req, res, next) => {
             }
         }]
     };
+
+
     paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
         if (error) {
             console.log(error.response);
             throw error;
         } else {
             console.log(JSON.stringify(payment));
-            res.send(' Thanh toán thành công ! ');
+            res.send('Success');
         }
     });
 }
@@ -220,5 +246,6 @@ module.exports = {
     checkout,
     checkoutInfo,
     paymentSuccess,
-    addCountToCart
+    addCountToCart,
+    checkoutStep2
 }

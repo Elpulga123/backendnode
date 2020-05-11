@@ -47,7 +47,7 @@ function formatPrice(text) {
 
 function checkoutinfo123(data) {
     $.ajax({
-        url: '/payment',
+        url: '/checkout-02',
         type: 'post',
         dataType: 'json',
         contentType: 'application/json',
@@ -55,10 +55,12 @@ function checkoutinfo123(data) {
         cache: false,
         processData: false,
         success: function (result) {
-            
+            if(result){
+                window.location.href = result.redirect;
+            }
         },
         error: function (error) {
-            alert('Lỗi');
+            alert(error);
         }
     })
 }
