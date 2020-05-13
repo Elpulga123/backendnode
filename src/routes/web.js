@@ -8,6 +8,7 @@ import { initPassportLocal } from '../modal/controllers/passportController/local
 
 initPassportLocal();
 let router = express.Router();
+
 /* GET home page. */
 export let initRoutesFrontend = (app) => {
   // FRONT-END
@@ -19,8 +20,8 @@ export let initRoutesFrontend = (app) => {
   router.get('/cart/delete_cart/:id', controllerFrontend.deleteItemCart);
   // payment
   router.get('/checkout', controllerFrontend.checkout);
-  router.post('/checkout-02',controllerFrontend.checkoutInfo);
-  router.get('/checkout-03', controllerFrontend.checkoutStep2)
+  router.post('/checkout-02',controllerFrontend.checkoutStep2);
+  router.get('/checkout-03', controllerFrontend.checkoutStep3);
   router.get('/success', controllerFrontend.paymentSuccess);
   router.post('/add-cart', controllerFrontend.addCountToCart);
 

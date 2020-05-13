@@ -6,9 +6,7 @@ import paypal from 'paypal-rest-sdk';
 // cấu hình paypal.
 paymentConfigure;
 
-
 let getAllCart = async (req, res, next) => {
-
     try {
         var carts = req.session.cartSess;
         console.log(carts.totalPrice);
@@ -115,17 +113,17 @@ let checkout = (req, res, next) => {
 }
 
 // lấy thông tin từ form của khách hàng
-let checkoutInfo = (req, res, next) => {
+let checkoutStep2 = (req, res, next) => {
 
     const objs = req.body; // req.body = [Object: null prototype] { title: 'product' }
     let result = {
         obj: objs,
         redirect : '/checkout-03'
-        
     }
+    req.session.infoSess = req.body;
     return res.status(200).send(result);
     // // thêm thông tin khách hàng vào session.
-    // req.session.infoSess = req.body;
+   
     // var carts = req.session.cartSess;
     // // thêm thông tin khách hàng vào session.
     // req.session.infoSess = req.body;
@@ -192,16 +190,16 @@ let checkoutInfo = (req, res, next) => {
 
 }
 
-let checkoutStep2 = (req, res, next) => {
+let checkoutStep3 = (req, res, next) => {
 
     var carts = req.session.cartSess;
     // thêm thông tin khách hàng vào session.
-    req.session.infoSess = req.body;
+    var infos = req.session.infoSess;
     var stringCarts = JSON.stringify(carts);
     res.render('frontend/sections/cart/checkout-step2', {
         title: 'Thông tin thanh toán',
         carts: carts,
-        info : req.session.info,
+        infos : infos,
         stringCarts: stringCarts
     });
 }
@@ -244,8 +242,8 @@ module.exports = {
     addToCart,
     deleteItemCart,
     checkout,
-    checkoutInfo,
     paymentSuccess,
     addCountToCart,
-    checkoutStep2
+    checkoutStep2,
+    checkoutStep3
 }

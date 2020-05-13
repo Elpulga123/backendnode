@@ -109,32 +109,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <ul class="list-info">
-                                                <% for (var key in carts.items) { %>
-                                                <li><%= carts.items[key].item.name %></li>
+                                                <% for (var key in infos) { %>
+                                                <li><%= infos[key] %></li>
                                                 <% } %>
                                             </ul>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-method__login">
-                                                <form action="#">
-                                                    <h5 class="checkout-method__title">Login</h5>
-                                                    <h5 class="checkout-method__title">Already Registered?</h5>
-                                                    <p class="checkout-method__subtitle">Please login below:</p>
-                                                    <div class="single-input">
-                                                        <label for="user-email">Email Address</label>
-                                                        <input type="email" id="user-email">
-                                                    </div>
-                                                    <div class="single-input">
-                                                        <label for="user-pass">Password</label>
-                                                        <input type="password" id="user-pass">
-                                                    </div>
-                                                    <p class="require">* Required fields</p>
-                                                    <a href="#">Forgot Passwords?</a>
-                                                    <div class="dark-btn">
-                                                        <a href="#">LogIn</a>
-                                                    </div>
-                                                </form>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -146,37 +124,34 @@
             </div>
             <div class="col-md-4">
                 <div class="order-details">
-                    <h5 class="order-details__title">Your Order</h5>
+                    <h5 class="order-details__title"> Giỏ hàng </h5>
+                    <% if(carts) { %>
                     <div class="order-details__item">
+                        <% for (var key in carts.items) { %>
                         <div class="single-item">
                             <div class="single-item__thumb">
-                                <img src="images/cart/1.png" alt="ordered item">
+                                <img src="/assets/images/products/<%= carts.items[key].item.image[0] %>"
+                                    alt="ordered item">
                             </div>
                             <div class="single-item__content">
-                                <a href="#">Santa fe jacket for men</a>
-                                <span class="price">$128</span>
+                                <a
+                                    href="/product/<%= carts.items[key].item._id %>"><%= carts.items[key].item.name %></a>
+                                <span class="price">
+                                    <span class="price-cart"> <%= carts.items[key].item.price %></span>
+                                </span>
                             </div>
                             <div class="single-item__remove">
                                 <a href="#"><i class="zmdi zmdi-delete"></i></a>
                             </div>
                         </div>
-                        <div class="single-item">
-                            <div class="single-item__thumb">
-                                <img src="images/cart/2.png" alt="ordered item">
-                            </div>
-                            <div class="single-item__content">
-                                <a href="#">Santa fe jacket for men</a>
-                                <span class="price">$128</span>
-                            </div>
-                            <div class="single-item__remove">
-                                <a href="#"><i class="zmdi zmdi-delete"></i></a>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                     <div class="order-details__count">
                         <div class="order-details__count__single">
                             <h5>sub total</h5>
-                            <span class="price">$909.00</span>
+                            <span class="price">
+                                <span class="price-cart"> <%= carts.totalPrice %></span>
+                            </span>
                         </div>
                         <div class="order-details__count__single">
                             <h5>Tax</h5>
@@ -189,7 +164,14 @@
                     </div>
                     <div class="ordre-details__total">
                         <h5>Order total</h5>
-                        <span class="price">$918.00</span>
+                        <span class="price"><span class="price-cart"> <%= carts.totalPrice %></span></span>
+                    </div>
+
+                    <% } %>
+                    <div class="order-details__total">
+                        <ul class="payment__btn">
+                            <li class="active"><a class="test" href="/checkout-02"> Payment </a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

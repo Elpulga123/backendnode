@@ -4,7 +4,7 @@ import {getAllCart,
     addToCart,
     deleteItemCart,
     checkout,
-    checkoutInfo,
+    checkoutStep3,
     paymentSuccess,
     addCountToCart,
     checkoutStep2} from './cartController';
@@ -18,7 +18,7 @@ module.exports = {
     addToCart,
     deleteItemCart,
     checkout,
-    checkoutInfo,
+    checkoutStep3,
     paymentSuccess,
     addCountToCart,
     checkoutStep2
