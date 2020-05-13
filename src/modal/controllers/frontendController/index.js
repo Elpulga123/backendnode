@@ -7,7 +7,8 @@ import {getAllCart,
     checkoutStep3,
     paymentSuccess,
     addCountToCart,
-    checkoutStep2} from './cartController';
+    checkoutStep2,
+    checkoutStep4} from './cartController';
 
 module.exports = {
 
@@ -21,5 +22,6 @@ module.exports = {
     checkoutStep3,
     paymentSuccess,
     addCountToCart,
-    checkoutStep2
+    checkoutStep2,
+    checkoutStep4
 }
