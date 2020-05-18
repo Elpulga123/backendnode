@@ -70,7 +70,6 @@ let addCountToCart = (req, res, next) => {
         return res.status(200).send(result);
 
         //cartModel.items = cart.items;
-
         // req.user._id được lưu ở session khi đăng nhập
         //let addCartService = await service.addCartService(cartModel);
         //console.log(typeof addCartService);
@@ -148,46 +147,49 @@ let checkoutStep3 = async (req, res, next) => {
 
 let checkoutStep4 = (req, res, next) => {
 
-    const create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://localhost:5000/success",
-            "cancel_url": "http://localhost:5000/cancel"
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "Red Sox Hat",
-                    "sku": "001",
-                    "price": "25.00",
-                    "currency": "USD",
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "currency": "USD",
-                "total": "25.00"
-            },
-            "description": "Hat for the best team ever"
-        }]
-    };
+
+    var x = req.session.cartSess.items;
+
+    // thêm vào 1 mảng, sau đó thêm vào chỗ transactions => item_list.
+    for(let item in x){
+        console.log(x[item]);
+    }
 
 
-    // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-            for (let i = 0; i < payment.links.length; i++) {
-                if (payment.links[i].rel === 'approval_url') {
-                    res.redirect(payment.links[i].href);
-                }
-            }
-        }
-    });
+    // const create_payment_json = {
+    //     "intent": "sale",
+    //     "payer": {
+    //         "payment_method": "paypal"
+    //     },
+    //     "redirect_urls": {
+    //         "return_url": "http://localhost:5000/success",
+    //         "cancel_url": "http://localhost:5000/cancel"
+    //     },
+    //     "transactions": [{
+    //         "item_list": {
+    //             "items": [items]
+    //         },
+    //         "amount": {
+    //             "currency": "USD",
+    //             "total": '25.00'
+    //         },
+    //         "description": "Hat for the best team ever"
+    //     }]
+    // };
+
+
+    // // phương thức này trả về một đối tượng các thông tin đơn hàng mà client đưa lên
+    // paypal.payment.create(create_payment_json, function (error, payment) {
+    //     if (error) {
+    //         throw error;
+    //     } else {
+    //         for (let i = 0; i < payment.links.length; i++) {
+    //             if (payment.links[i].rel === 'approval_url') {
+    //                 res.redirect(payment.links[i].href);
+    //             }
+    //         }
+    //     }
+    // });
 }
 
 let paymentSuccess = (req, res, next) => {

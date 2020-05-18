@@ -29,7 +29,6 @@ function deleteItemcart(url) {
     })
 }
 
-
 function formatPrice(text) {
     // price Format for frontend
     var formatter = new Intl.NumberFormat('VND', {

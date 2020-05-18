@@ -21,11 +21,17 @@ export let initRoutesFrontend = (app) => {
   router.get('/cart/delete_cart/:id', controllerFrontend.deleteItemCart);
   // payment
   router.get('/checkout', controllerFrontend.checkout);
-  router.post('/checkout-02',controllerFrontend.checkoutStep2);
+  router.post('/checkout-02', controllerFrontend.checkoutStep2);
   router.get('/checkout-03', controllerFrontend.checkoutStep3);
   router.get('/checkout-04', controllerFrontend.checkoutStep4);
   router.get('/success', controllerFrontend.paymentSuccess);
   router.post('/add-cart', controllerFrontend.addCountToCart);
+
+  router.get('/*',(req, res) => {
+    res.render('frontend/sections/404', {
+      title: 'Không tìm thấy',
+    });
+  });
 
   return app.use('/', router);
 }

@@ -33,6 +33,12 @@ app.use(passport.session());
 //initRoutes(app);
 initRoutesFrontend(app);
 app.use('/admin', admin);
+app.use(function(req, res, next){
+  res.status(404).render('frontend/sections/404.ejs');
+});
+
+//initRoutes end;
+
 
 //connect to DB
 connectDB().then(() => {
