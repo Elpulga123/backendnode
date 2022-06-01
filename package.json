@@ -29,7 +29,7 @@
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "query-string": "^6.11.1",
-    "sharp": "^0.24.0",
+    "sharp": "^0.30.5",
     "uuidv4": "^5.0.1"
   },
   "devDependencies": {
